@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from runner.koan import *
-
 import random
+
+from runner.koan import *
 
 
 class DiceSet(object):
@@ -16,8 +16,11 @@ class DiceSet(object):
 
     def roll(self, n):
         # Needs implementing!
-        # Tip: random.randint(min, max) can be used to generate random numbers
-        pass
+        # Tip:random.randint(min, max) can be used to generate random numbers
+        self._values = []
+        for value in range(0, n):
+            ran_value = random.randint(1, 6)
+            self._values.append(ran_value)
 
 
 class AboutDiceProject(Koan):
@@ -52,8 +55,7 @@ class AboutDiceProject(Koan):
         dice.roll(5)
         second_time = dice.values
 
-        self.assertNotEqual(first_time, second_time, \
-            "Two rolls should not be equal")
+        self.assertNotEqual(first_time, second_time, "Two rolls should not be equal {} : {}".format(first_time, second_time))
 
         # THINK ABOUT IT:
         #
