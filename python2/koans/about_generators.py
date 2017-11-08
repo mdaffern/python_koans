@@ -104,7 +104,8 @@ class AboutGenerators(Koan):
         #       section of http://www.python.org/dev/peps/pep-0342/
         next(generator)
 
-        self.assertEqual(__, generator.send(1 + 2))
+        # TODO: Find out why this adds 1 + 2
+        self.assertEqual(3, generator.send(1 + 2))
 
     def test_before_sending_a_value_to_a_generator_next_must_be_called(self):
         generator = self.coroutine()
@@ -112,7 +113,7 @@ class AboutGenerators(Koan):
         try:
             generator.send(1 + 2)
         except TypeError as ex:
-            self.assertMatch(__, ex[0])
+            self.assertMatch("can't send non-None value to a just-started generator", ex[0])
 
     # ------------------------------------------------------------------
 
@@ -130,11 +131,11 @@ class AboutGenerators(Koan):
 
         generator2 = self.yield_tester()
         next(generator2)
-        self.assertEqual(__, next(generator2))
+        self.assertEqual('no value', next(generator2))
 
     def test_send_none_is_equivalent_to_next(self):
         generator = self.yield_tester()
 
         next(generator)
         # 'next(generator)' is exactly equivalent to 'generator.send(None)'
-        self.assertEqual(__, generator.send(None))
+        self.assertEqual('no value', generator.send(None))
