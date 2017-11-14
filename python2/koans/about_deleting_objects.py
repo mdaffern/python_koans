@@ -10,7 +10,7 @@ class AboutDeletingObjects(Koan):
         del lottery_nums[1]
         del lottery_nums[2:4]
 
-        self.assertEqual(__, lottery_nums)
+        self.assertEqual([4, 15, 42], lottery_nums)
 
     def test_del_can_remove_entire_lists(self):
         lottery_nums = [4, 8, 15, 16, 23, 42]
@@ -19,7 +19,7 @@ class AboutDeletingObjects(Koan):
             win = lottery_nums
         except Exception as e:
             pass
-        self.assertMatch(__, e[0])
+        self.assertMatch("local variable 'lottery_nums' referenced before assignment", e[0])
 
     # --------------------------------------------------------------------
 
@@ -52,8 +52,8 @@ class AboutDeletingObjects(Koan):
         except AttributeError as e:
             err_msg2 = e.args[0]
 
-        self.assertMatch(__, err_msg1)
-        self.assertMatch(__, err_msg2)
+        self.assertMatch("'ClosingSale' object has no attribute 'toilet_brushes'", err_msg1)
+        self.assertMatch("'ClosingSale' object has no attribute 'hamsters'", err_msg2)
 
     # --------------------------------------------------------------------
 
